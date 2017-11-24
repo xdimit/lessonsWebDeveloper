@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>lesson 6</title>
+  
+  <style>
+    h1 {
+	text-shadow: 10px 10px 5px; 
+	opacity: 0.5;
+	}
+    table td{
+          border: inset;
+		  padding: 12px;
+    }
+	
+	.divBl{
+	      border:solid 2px black;
+		  width:30%; 
+		  height:50px;
+		  background-color:blue; 
+		  box-shadow: 10px 10px 5px 2px #078aed;
+	}    
+  </style>
+  
+  <script>
+  function stick(){
+	return document.getElementById('td_a1').innerHTML+=document.getElementById('my_inp').value; 
+	}
+  </script>
+  
+</head>
+<body>
+  <h1>Урок на тему: JavaScript</h1>
+  <hr>
+  <table>
+    <tr>
+      <td><input type="button" value="button_a1" onClick="document.getElementById('td_a1').style.display='table-cell';"></td>
+      <td><input type="button" value="button_a2" onClick="document.getElementById('td_a2').style.display='table-cell';"></td>
+      <td><input type="button" value="button_a3" onClick="document.getElementById('td_a3').style.display='table-cell';"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="button_b1" onClick="document.getElementById('td_b1').style.display='table-cell';"></td>
+      <td><input type="button" value="button_b2" onClick="document.getElementById('td_b2').style.display='table-cell';"></td>
+      <td><input type="button" value="button_b3" onClick="document.getElementById('td_b3').style.display='table-cell';"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="button_c1" onClick="document.getElementById('td_c1').style.display='table-cell';"></td>
+      <td><input type="button" value="button_c2" onClick="document.getElementById('td_c2').style.display='table-cell';"></td>
+      <td><input type="button" value="button_c3" onClick="document.getElementById('td_c3').style.display='table-cell';"></td>
+    </tr>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <td id="td_a1" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text a1</td>
+      <td id="td_a2" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text a2</td>
+      <td id="td_a3" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text a3</td>
+    </tr>
+    <tr>
+      <td id="td_b1" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text b1</td>
+      <td id="td_b2" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text b2</td>
+      <td id="td_b3" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text b3</td>
+    </tr>
+    <tr>
+      <td id="td_c1" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text c1</td>
+      <td id="td_c2" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text c2</td>
+      <td id="td_c3" onClick="this.style.display='none';" onMouseOver="document.getElementById('divBlue').innerHTML=this.textContent;">This some text c3</td>
+    </tr>
+  </table>
+  <br><br>
+  <div id="divBlue" class="divBl"></div>
+  <br><br>
+  <hr>
+    <input type="text" id="my_inp" name="stick_imp" placeholder="Ваш текст">
+    <input type="button" name="stick" value="СКЛЕИТЬ" onClick="stick();">
+  <hr>
+</body>
+</html>
