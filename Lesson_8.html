@@ -5,18 +5,167 @@
     <link rel="stylesheet" href="main.css">
     <meta charset="UTF-8">
     <title>Lesson_8_EventKeyboard</title>
+    <style>
+    #container {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 500px;
+        height: 380px;
+        margin: 10px auto;
+        position: absolute;
+        border-radius: 10px;
+        background-color: rgba(175, 238, 238, 0.5);
+    }
+
+    #field {
+
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 400px;
+        height: 300px;
+        padding: 5px;
+        margin: 10px auto;
+        position: absolute;
+        border: 1px solid grey;
+        background-color: #fff;
+        border-radius: 0 5px 0 5px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #info {
+        width: 94%;
+        bottom: 8px;
+        padding: 8px;
+        height: 120px;
+        position: absolute;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .repeat {
+        top: 8px;
+        width: 93%;
+        padding: 8px;
+        height: 136px;
+        position: absolute;
+    }
+
+    .text {
+        left: 120px;
+        bottom: 20px;
+        position: absolute;
+    }
+
+    .button {
+        left: 310px;
+        bottom: 20px;
+        position: absolute;
+    }
+
+    .shadowInput {
+        background-color: rgba(255, 255, 255, 0.6);
+        box-shadow: 5px 5px 10px rgba(47, 79, 79, 0.4);
+    }
+    </style>
 </head>
 
 <body>
     <div id="container">
         <div id="field">
-        	<div class="repeat"></div>
-        	<div id="info"></div>
+            <div class="repeat"></div>
+            <div id="info"></div>
         </div>
         <input type="text" class="text">
         <input type="button" class="button" value="Сброс">
         <script async src="script.js"></script>
     </div>
+    <script>
+    'use strict'
+
+    let blurCount = 0;
+    let focusCount = 0;
+    let keyupCount = 0;
+    let changeCount = 0;
+    let keydownCount = 0;
+    let keypressCount = 0;
+
+    function inFocus(event) {
+        let text = document.querySelector('.text');
+        text.classList.toggle('shadowInput');
+    }
+
+    function inBlur(event) {
+        let text = document.querySelector('.text');
+        text.classList.toggle('shadowInput');
+    }
+
+    function clearAll() {
+        blurCount = 0;
+        focusCount = 0;
+        keyupCount = 0;
+        changeCount = 0;
+        keydownCount = 0;
+        keypressCount = 0;
+        document.querySelector('.text').value = '';
+        document.getElementById('info').innerHTML = '';
+        document.querySelector('.repeat').innerHTML = '';
+    }
+
+    function repeatFromText(event) {
+        let text = document.querySelector('.text');
+        let repeat = document.querySelector('.repeat');
+        repeat.innerHTML = text.value;
+    }
+
+
+    function showAllEvent() {
+        let info = document.getElementById('info');
+        info.innerHTML = 'Blur ' + blurCount + '</br>' +
+            'Focus ' + focusCount + '</br>' +
+            'Keyup ' + keyupCount + '</br>' +
+            'Change ' + changeCount + '</br>' +
+            'Keydown ' + keydownCount + '</br>' +
+            'Keypress ' + keypressCount + '</br>';
+    }
+
+
+    function blurCounter() { blurCount++; showAllEvent(); };
+
+    function focusCounter() { focusCount++; showAllEvent(); };
+
+    function keyupCounter() { keyupCount++; showAllEvent(); };
+
+    function changeCounter() { changeCount++; showAllEvent(); };
+
+    function keydownCounter() { keydownCount++; showAllEvent(); };
+
+    function keypressCounter(event) {
+        keypressCount++;
+        showAllEvent();
+        let code = event.keyCode || event.which;
+        let codeChar = String.fromCharCode(code);
+        if (code == 1072) {
+            this.value += codeChar.toUpperCase();
+            event.preventDefault();
+        }
+
+    };
+
+
+    document.querySelector('.button').addEventListener("click", clearAll);
+    document.querySelector('.text').addEventListener("focus", inFocus);
+    document.querySelector('.text').addEventListener("blur", inBlur);
+    document.querySelector('.text').addEventListener("blur", blurCounter);
+    document.querySelector('.text').addEventListener("focus", focusCounter);
+    document.querySelector('.text').addEventListener("keyup", keyupCounter);
+    document.querySelector('.text').addEventListener("change", changeCounter);
+    document.querySelector('.text').addEventListener("keydown", keydownCounter);
+    document.querySelector('.text').addEventListener("keypress", keypressCounter);
+    document.querySelector('.text').addEventListener("keypress", repeatFromText);
+    </script>
 </body>
 
 </html>

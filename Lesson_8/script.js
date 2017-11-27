@@ -57,6 +57,7 @@ function keypressCounter(event) {
 	showAllEvent();
 	let code = event.keyCode || event.which;
 	let codeChar = String.fromCharCode(code);
+	
 	if(code == 1072) {   
 	  this.value += codeChar.toUpperCase();
 	  event.preventDefault();
